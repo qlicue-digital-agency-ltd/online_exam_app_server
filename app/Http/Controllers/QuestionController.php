@@ -30,20 +30,27 @@ class QuestionController extends Controller
 
         $validator = Validator::make($request->all(), [
             'content' => 'required',
+            'examination_id' => 'required',
         ]);
+        $path = null;
 
         if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
 
+
+        $examination = Examination::find($request->input('examination_id'));
+        if (!$examination) return response()->json(['error' => 'Examination not found'], 404);
+
+
         if ($request->hasFile('file')) {
-            $this->path = $request->file('file')->store('questions');
+            $path = $request->file('file')->store('questions');
         }
 
         $question = new Question();
 
         $question->content = $request->input('content');
-        $question->image = $this->path;
+        $question->image = $path;
 
-        $question->save();
+          $examination->questions()->save($question);
 
         return  response()->json(['question' => $question], 201);
     }

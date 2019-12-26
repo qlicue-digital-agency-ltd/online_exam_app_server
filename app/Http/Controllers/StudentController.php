@@ -3,83 +3,102 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    // Gets all students from the database
+    public function getAllStudents()
     {
-        //
+        return response()->json(['students' => Student::all()], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    // return a single student from the database
+    public function getStudent($studentId)
     {
-        //
+        $student = Student::find($studentId);
+        if (!$student) return response()->json(['error' => 'Student not found'], 404);
+
+        return response()->json(['student' => $student], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function postStudent(Request $request)
     {
-        //
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'grade_id' => 'required',
+            'district_id' => 'required',
+            'region_id' => 'required',
+            'age' => 'required',
+            'gender' => 'required',
+            'school_name' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
+
+        $user = User::find($request->input('user_id'));
+        if (!$user) return response()->json(['error' => 'Parent not found'], 404);
+
+
+        $student = new Student();
+
+        $student->name = $request->input('name');
+        $student->grade_id = $request->input('grade_id');
+        $student->district_id = $request->input('district_id');
+        $student->region_id = $request->input('region_id');
+        $student->age = $request->input('age');
+        $student->gender = $request->input('gender');
+        $student->school_name = $request->input('school_name');
+
+        $user->students()->save($student);
+
+        return  response()->json(['student' => $student], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Student $student)
+    public function putStudent(Request $request, $studentId)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'grade_id' => 'required',
+            'district_id' => 'required',
+            'region_id' => 'required',
+            'age' => 'required',
+            'gender' => 'required',
+            'school_name' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
+
+        $student = Student::find($studentId);
+        if (!$student) return response()->json(['error' => 'Student not found'], 404);
+
+        $student->update([
+            'name' => $request->input('name'),
+            'grade_id' => $request->input('grade_id'),
+            'district_id' => $request->input('district_id'),
+            'region_id' => $request->input('region_id'),
+            'age' => $request->input('age'),
+            'gender' => $request->input('gender'),
+            'school_name' => $request->input('school_name'),
+            'user_id' => $request->input('user_id')
+
+        ]);
+
+        return response()->json(['student' => $student], 201);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Student $student)
+    public function deleteStudent($studentId)
     {
-        //
-    }
+        $student = Student::find($studentId);
+        if (!$student) return response()->json(['error' => 'Student not found'], 404);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Student $student)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Student $student)
-    {
-        //
+        $student->delete();
+        return response()->json(['message' => 'Student deleted Successfully'], 201);
     }
 }

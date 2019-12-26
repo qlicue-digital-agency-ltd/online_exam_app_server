@@ -32,7 +32,7 @@ class ExaminationController extends Controller
             'duration' => 'required',
             'opening_time' => 'required',
             'closing_time' => 'required',
-            'examination_id' => 'required',
+            'subject_id' => 'required',
             'teacher_id' => 'required',
         ]);
 
