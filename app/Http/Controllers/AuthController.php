@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserHasRegisteredSucceffulyEvent;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -35,6 +36,10 @@ class AuthController extends Controller
         ]);
 
         $token = auth()->login($user);
+
+
+        ///event to assign a default user role
+        event(new UserHasRegisteredSucceffulyEvent($user));
 
         return response()->json([
             'token' => $token,

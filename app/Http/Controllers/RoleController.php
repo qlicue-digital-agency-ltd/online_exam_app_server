@@ -4,82 +4,70 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    // Gets all roles from the database
+    public function getAllRoles()
     {
-        //
+        return response()->json(['roles' => Role::all()], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    // return a single role from the database
+    public function getRole($roleId)
     {
-        //
+        $role = Role::find($roleId);
+        if (!$role) return response()->json(['error' => 'Role not found'], 404);
+
+        return response()->json(['role' => $role], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function postRole(Request $request)
     {
-        //
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
+
+
+        $role = new Role();
+
+        $role->name = $request->input('name');
+
+        $role->save();
+
+        return  response()->json(['role' => $role], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
+    public function putRole(Request $request, $roleId)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
+
+        $role = Role::find($roleId);
+        if (!$role) return response()->json(['error' => 'Role not found'], 404);
+
+        $role->update([
+            'name' => $request->input('name')
+        ]);
+
+        return response()->json(['role' => $role], 201);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Role $role)
+    public function deleteRole($roleId)
     {
-        //
-    }
+        $role = Role::find($roleId);
+        if (!$role) return response()->json(['error' => 'Role not found'], 404);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Role $role)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Role $role)
-    {
-        //
+        $role->delete();
+        return response()->json(['message' => 'Role deleted Successfully'], 201);
     }
 }

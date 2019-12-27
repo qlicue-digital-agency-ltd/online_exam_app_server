@@ -74,3 +74,11 @@ Route::post('student', ['uses' => 'StudentController@postStudent']);
 Route::get('student/{studentId}', ['uses' => 'StudentController@getStudent']);
 Route::put('student/{studentId}', ['uses' => 'StudentController@putStudent']);
 Route::delete('student/{studentId}', ['uses' => 'StudentController@deleteStudent']);
+
+
+///Roles routes
+Route::get('roles', ['uses' => 'RoleController@getAllRoles']);
+Route::post('role', ['uses' => 'RoleController@postRole']);
+Route::get('role/{roleId}', ['uses' => 'RoleController@getRole']);
+Route::put('role/{roleId}', ['uses' => 'RoleController@putRole']);
+Route::delete('role/{roleId}', ['uses' => 'RoleController@deleteRole']);
