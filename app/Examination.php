@@ -33,4 +33,9 @@ class Examination extends Model
     {
         return $this->hasMany(Rank::class);
     }
+
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class);
+    }
 }

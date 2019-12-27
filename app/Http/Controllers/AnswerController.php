@@ -30,7 +30,6 @@ class AnswerController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            
             'content' => 'required',
             'alphabet' => 'required',
             'is_correct' => 'required',
@@ -57,6 +56,7 @@ class AnswerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'content' => 'required',
+            'alphabet' => 'required',
             'is_correct' => 'required',
         ]);
 
@@ -67,7 +67,9 @@ class AnswerController extends Controller
 
         $answer->update([
             'content' => $request->input('content'),
-            'is_correct' => $request->input('is_correct')
+            'is_correct' => $request->input('is_correct'),
+            'alphabet' => $request->input('alphabet')
+
         ]);
 
         return response()->json(['answer' => $answer], 201);

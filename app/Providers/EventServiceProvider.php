@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\AssignUserRoleListener',
             'App\Listeners\SendConfirmationCodeListener',
         ],
+        'App\Events\ExaminationHasBeenCreatedEvent' => [
+            'App\Listeners\GenerateExaminationNumberListener',
+        ],
     ];
 
     /**

@@ -9,7 +9,7 @@ class Subject extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'code'];
     protected $dates = ['deleted_at'];
 
 

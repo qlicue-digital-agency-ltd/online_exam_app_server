@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ExaminationHasBeenCreatedEvent;
 use App\Examination;
 use App\Subject;
 use Illuminate\Http\Request;
@@ -33,6 +34,7 @@ class ExaminationController extends Controller
             'opening_time' => 'required',
             'closing_time' => 'required',
             'subject_id' => 'required',
+            'grade_id' => 'required',
             'teacher_id' => 'required',
         ]);
 
@@ -44,14 +46,15 @@ class ExaminationController extends Controller
 
 
         $examination = new Examination();
-
-        $examination->exam_no = "SPE0001MT";
         $examination->duration = $request->input('duration');
         $examination->opening_time = $request->input('opening_time');
         $examination->closing_time = $request->input('closing_time');
         $examination->teacher_id = $request->input('teacher_id');
+        $examination->grade_id = $request->input('grade_id');
 
         $subject->examinations()->save($examination);
+
+        event(new ExaminationHasBeenCreatedEvent($examination, $subject->code));
 
         return  response()->json(['examination' => $examination], 201);
     }

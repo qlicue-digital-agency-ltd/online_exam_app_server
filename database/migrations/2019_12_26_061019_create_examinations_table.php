@@ -15,14 +15,15 @@ class CreateExaminationsTable extends Migration
     {
         Schema::create('examinations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            
-            $table->string('exam_no');
+
+            $table->string('exam_no')->nullable()->unique();
             $table->bigInteger('subject_id');
             $table->bigInteger('teacher_id');
+            $table->bigInteger('grade_id');
             $table->bigInteger('duration');
             $table->dateTime('opening_time');
             $table->dateTime('closing_time');
-            
+
             $table->softDeletes();
             $table->timestamps();
         });

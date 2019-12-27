@@ -14,8 +14,8 @@ class Grade extends Model
 
     ///eloquent relations
 
-    public function subject()
+    public function examinations()
     {
-        return $this->belongsToMany(Subject::class);
+        return $this->hasMany(Examination::class);
     }
 }
