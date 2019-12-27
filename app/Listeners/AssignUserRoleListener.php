@@ -27,7 +27,7 @@ class AssignUserRoleListener
      */
     public function handle(UserHasRegisteredSucceffulyEvent $event)
     {
-        $role = Role::where('name', 'Parent')->first();
+        $role = Role::where('name', $event->roleName)->first();
 
         $event->user->roles()->attach($role);
     }

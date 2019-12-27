@@ -50,7 +50,7 @@ class AuthController extends Controller
 
 
         ///event to assign a default user role
-        event(new UserHasRegisteredSucceffulyEvent($user));
+        event(new UserHasRegisteredSucceffulyEvent($user, 'Parent'));
 
         return response()->json([
             'token' => $token,
