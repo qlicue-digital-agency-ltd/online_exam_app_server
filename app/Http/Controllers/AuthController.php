@@ -12,6 +12,17 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+
+    public function getAllUsers()
+    {
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->roles;
+        }
+
+        return response()->json(['users' => $users]);
+    }
+
     public function register(Request $request)
     {
 
