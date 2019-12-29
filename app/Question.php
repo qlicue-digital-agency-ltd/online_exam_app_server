@@ -9,7 +9,7 @@ class Question extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['content', 'image'];
+    protected $fillable = ['number', 'content', 'image'];
     protected $dates = ['deleted_at'];
 
     //eloquent relationship
@@ -18,7 +18,7 @@ class Question extends Model
     {
         return $this->belongsTo(Examination::class);
     }
-    
+
     public function answers()
     {
         return $this->hasMany(Answer::class);

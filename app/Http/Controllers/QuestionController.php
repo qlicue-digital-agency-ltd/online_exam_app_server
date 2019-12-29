@@ -30,6 +30,7 @@ class QuestionController extends Controller
 
         $validator = Validator::make($request->all(), [
             'content' => 'required',
+            'number' => 'required',
             'examination_id' => 'required',
         ]);
         $path = null;
@@ -46,11 +47,11 @@ class QuestionController extends Controller
         }
 
         $question = new Question();
-
+        $question->number = $request->input('number');
         $question->content = $request->input('content');
         $question->image = $path;
 
-          $examination->questions()->save($question);
+        $examination->questions()->save($question);
 
         return  response()->json(['question' => $question], 201);
     }
@@ -59,6 +60,7 @@ class QuestionController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'content' => 'required',
+            'number' => 'required',
         ]);
 
         if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
@@ -67,7 +69,8 @@ class QuestionController extends Controller
         if (!$question) return response()->json(['error' => 'Question not found'], 404);
 
         $question->update([
-            'content' => $request->input('name')
+            'content' => $request->input('name'),
+            'number' => $request->input('number')
         ]);
 
         return response()->json(['question' => $question], 201);
