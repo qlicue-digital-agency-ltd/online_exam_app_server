@@ -55,21 +55,21 @@ class AnswersTableSeeder extends Seeder
         $answer->content = "4";
         $answer->alphabet = "B";
         $answer->is_correct = false;
-        $question = Question::find(1);
+        $question = Question::find(2);
         $question->answers()->save($answer);
 
         $answer = new Answer();
         $answer->content = "2";
         $answer->alphabet = "C";
         $answer->is_correct = false;
-        $question = Question::find(1);
+        $question = Question::find(2);
         $question->answers()->save($answer);
 
         $answer = new Answer();
         $answer->content = "8";
         $answer->alphabet = "D";
         $answer->is_correct = false;
-        $question = Question::find(1);
+        $question = Question::find(2);
         $question->answers()->save($answer);
 
 
@@ -259,7 +259,7 @@ class AnswersTableSeeder extends Seeder
         $answer->content = "pudding";
         $answer->alphabet = "B";
         $answer->is_correct = false;
-        $question = Question::find(8);
+        $question = Question::find(9);
         $question->answers()->save($answer);
 
         $answer = new Answer();
