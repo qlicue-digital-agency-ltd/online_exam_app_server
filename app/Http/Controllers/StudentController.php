@@ -47,7 +47,7 @@ class StudentController extends Controller
         if (!$user) return response()->json(['error' => 'Parent not found'], 404);
 
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->store('questions');
+            $path = $request->file('file')->store('profile');
         }
 
         $student = new Student();

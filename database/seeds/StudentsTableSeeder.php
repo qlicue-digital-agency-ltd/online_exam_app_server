@@ -18,7 +18,7 @@ class StudentsTableSeeder extends Seeder
 
         $student = new Student();
         $student->name = 'PETER KIKWA';
-        $student->image = null;
+        $student->image = "questions/6VOhoTBuWIdiayVA1yIVT3sZuBPYvTQ2VWIQiWyF.png";
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
@@ -111,7 +111,7 @@ class StudentsTableSeeder extends Seeder
 
         $student = new Student();
         $student->name = 'FRED IKANGA';
-        $student->image = null;
+        $student->image = "questions/6VOhoTBuWIdiayVA1yIVT3sZuBPYvTQ2VWIQiWyF.png";
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
@@ -137,7 +137,7 @@ class StudentsTableSeeder extends Seeder
 
         $student = new Student();
         $student->name = 'WINNY MAKUNDI';
-        $student->image = null;
+        $student->image = "questions/6VOhoTBuWIdiayVA1yIVT3sZuBPYvTQ2VWIQiWyF.png";
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;

@@ -19,18 +19,38 @@ class RankController extends Controller
 
         $ranks =  $examination->ranks()->orderBy('score', 'DESC')->get();
 
+        for ($i = 0; $i < count($ranks); $i++) {
+            if ($i > 0) {
+                if ($ranks[$i - 1]->score == $ranks[$i]->score) {
+                    $ranks[$i]->position = $ranks[$i - 1]->position;
+                } else {
+                    $ranks[$i]->position = $i + 1;
+                }
+            } else {
+                $ranks[$i]->position = $i + 1;
+            }
+        }
         return response()->json(['ranks' => $ranks], 200, [], JSON_NUMERIC_CHECK);
     }
 
 
     ///get students results..
-    public function getStudentRanks($examId)
+    public function getStudentRanks($studentId)
     {
 
-        $examination = Examination::find($examId);
-        if (!$examination) return response()->json(['error' => 'Examination not found'], 404);
+        $student = Student::find($studentId);
+        if (!$student) return response()->json(['error' => 'Student not found'], 404);
 
-        $ranks =  $examination->ranks()->orderBy('score', 'DESC')->get();
+        $ranks =  $student->ranks()->orderBy('id', 'DESC')->get();
+
+        foreach ($ranks  as $rank) {
+
+            //we get the desired examination
+            $examination = Examination::find($rank->examination_id);
+            ///returns rank of all students that attended the exam
+            $candidatesRanks =  $examination->ranks()->orderBy('score', 'DESC')->get();
+            $rank->candidates = count($candidatesRanks);
+        }
 
         return response()->json(['ranks' => $ranks], 200, [], JSON_NUMERIC_CHECK);
     }
