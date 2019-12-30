@@ -39,15 +39,21 @@ class StudentController extends Controller
             'user_id' => 'required',
         ]);
 
+        $path = null;
+
         if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
 
         $user = User::find($request->input('user_id'));
         if (!$user) return response()->json(['error' => 'Parent not found'], 404);
 
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->store('questions');
+        }
 
         $student = new Student();
 
         $student->name = $request->input('name');
+        $student->image = $path;
         $student->grade_id = $request->input('grade_id');
         $student->district_id = $request->input('district_id');
         $student->region_id = $request->input('region_id');

@@ -17,6 +17,7 @@ class CreateStudentsTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('name');
+            $table->string('image')->nullable();
             $table->string('gender');
             $table->integer('age');
             $table->string('school_name');

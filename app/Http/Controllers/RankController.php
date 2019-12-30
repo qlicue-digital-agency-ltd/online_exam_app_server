@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Rank;
+use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,16 +36,17 @@ class RankController extends Controller
 
         if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
 
+        $student = Student::find($request->input('student_id'));
+        if (!$student) return response()->json(['error' => 'Student not found'], 404);
 
 
         $rank = new Rank();
 
         $rank->examination_id = $request->input('examination_id');
-        $rank->student_id = $request->input('student_id');
         $rank->score = $request->input('score');
-  
 
-        $rank->save();
+
+        $student->ranks()->save($rank);
 
         return  response()->json(['rank' => $rank], 201);
     }
