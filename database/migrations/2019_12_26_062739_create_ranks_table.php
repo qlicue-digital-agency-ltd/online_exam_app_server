@@ -19,8 +19,7 @@ class CreateRanksTable extends Migration
             $table->bigInteger('student_id');
             $table->bigInteger('examination_id');
             $table->double('score');
-            $table->bigInteger('position');
-            
+
             $table->softDeletes();
             $table->timestamps();
         });

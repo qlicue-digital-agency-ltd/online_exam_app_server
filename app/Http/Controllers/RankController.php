@@ -30,8 +30,7 @@ class RankController extends Controller
         $validator = Validator::make($request->all(), [
             'student_id' => 'required',
             'examination_id' => 'required',
-            'score' => 'required',
-            'position' => 'required'
+            'score' => 'required'
         ]);
 
         if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
@@ -43,7 +42,7 @@ class RankController extends Controller
         $rank->examination_id = $request->input('examination_id');
         $rank->student_id = $request->input('student_id');
         $rank->score = $request->input('score');
-        $rank->position = $request->input('position');
+  
 
         $rank->save();
 

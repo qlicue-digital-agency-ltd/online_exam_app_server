@@ -9,7 +9,7 @@ class Rank extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['score', 'position', 'student_id', 'examination_id'];
+    protected $fillable = ['score', 'student_id', 'examination_id'];
     protected $dates = ['deleted_at'];
 
     ///eloquent relations
