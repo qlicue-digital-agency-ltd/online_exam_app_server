@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Examination;
 use App\Rank;
 use App\Student;
 use Illuminate\Http\Request;
@@ -10,10 +11,30 @@ use Illuminate\Support\Facades\Validator;
 class RankController extends Controller
 {
     // Gets all rank from the database
-    public function getAllRanks()
+    public function getAllRanks($examId)
     {
-        return response()->json(['ranks' => Rank::all()], 200);
+
+        $examination = Examination::find($examId);
+        if (!$examination) return response()->json(['error' => 'Examination not found'], 404);
+
+        $ranks =  $examination->ranks()->orderBy('score', 'DESC')->get();
+
+        return response()->json(['ranks' => $ranks], 200, [], JSON_NUMERIC_CHECK);
     }
+
+
+    ///get students results..
+    public function getStudentRanks($examId)
+    {
+
+        $examination = Examination::find($examId);
+        if (!$examination) return response()->json(['error' => 'Examination not found'], 404);
+
+        $ranks =  $examination->ranks()->orderBy('score', 'DESC')->get();
+
+        return response()->json(['ranks' => $ranks], 200, [], JSON_NUMERIC_CHECK);
+    }
+
 
 
     // return a single rank from the database
@@ -24,6 +45,8 @@ class RankController extends Controller
 
         return response()->json(['rank' => $rank->questions], 200);
     }
+
+
 
     public function postRank(Request $request)
     {

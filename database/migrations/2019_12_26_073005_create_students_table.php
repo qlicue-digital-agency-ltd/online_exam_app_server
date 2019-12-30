@@ -24,6 +24,7 @@ class CreateStudentsTable extends Migration
             $table->bigInteger('grade_id');
             $table->bigInteger('district_id');
             $table->bigInteger('region_id');
+            $table->bigInteger('user_id');
 
             $table->softDeletes();
             $table->timestamps();

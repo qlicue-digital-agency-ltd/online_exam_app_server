@@ -59,8 +59,8 @@ Route::delete('answer/{answerId}', ['uses' => 'AnswerController@deleteAnswer']);
 
 
 ///Ranks routes
-Route::get('ranks', ['uses' => 'RankController@getAllRanks']);
 Route::post('rank', ['uses' => 'RankController@postRank']);
+Route::get('ranks/{examId}', ['uses' => 'RankController@getAllRanks']);
 Route::get('rank/{rankId}', ['uses' => 'RankController@getRank']);
 Route::delete('rank/{rankId}', ['uses' => 'RankController@deleteRank']);
 
