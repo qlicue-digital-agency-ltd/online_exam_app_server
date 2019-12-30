@@ -43,6 +43,18 @@ class RankController extends Controller
 
         $ranks =  $student->ranks()->orderBy('id', 'DESC')->get();
 
+        for ($i = 0; $i < count($ranks); $i++) {
+            if ($i > 0) {
+                if ($ranks[$i - 1]->score == $ranks[$i]->score) {
+                    $ranks[$i]->position = $ranks[$i - 1]->position;
+                } else {
+                    $ranks[$i]->position = $i + 1;
+                }
+            } else {
+                $ranks[$i]->position = $i + 1;
+            }
+        }
+
         foreach ($ranks  as $rank) {
 
             //we get the desired examination
