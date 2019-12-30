@@ -19,6 +19,7 @@ class RankController extends Controller
 
         $ranks =  $examination->ranks()->orderBy('score', 'DESC')->get();
 
+
         for ($i = 0; $i < count($ranks); $i++) {
             if ($i > 0) {
                 if ($ranks[$i - 1]->score == $ranks[$i]->score) {
@@ -33,15 +34,13 @@ class RankController extends Controller
         return response()->json(['ranks' => $ranks], 200, [], JSON_NUMERIC_CHECK);
     }
 
-
-    ///get students results..
-    public function getStudentRanks($studentId)
+    public function getPostion($examId)
     {
+        $examination = Examination::find($examId);
+        if (!$examination) return response()->json(['error' => 'Examination not found'], 404);
 
-        $student = Student::find($studentId);
-        if (!$student) return response()->json(['error' => 'Student not found'], 404);
+        $ranks =  $examination->ranks()->orderBy('score', 'DESC')->get();
 
-        $ranks =  $student->ranks()->orderBy('id', 'DESC')->get();
 
         for ($i = 0; $i < count($ranks); $i++) {
             if ($i > 0) {
@@ -55,16 +54,35 @@ class RankController extends Controller
             }
         }
 
-        foreach ($ranks  as $rank) {
+        return $ranks;
+    }
+    ///get students results..
+    public function getStudentRanks($studentId)
+    {
+
+        $student = Student::find($studentId);
+
+
+        $results =  $student->ranks()->orderBy('score', 'DESC')->get();
+
+
+
+        foreach ($results  as $result) {
 
             //we get the desired examination
-            $examination = Examination::find($rank->examination_id);
+            $examination = Examination::find($result->examination_id);
             ///returns rank of all students that attended the exam
-            $candidatesRanks =  $examination->ranks()->orderBy('score', 'DESC')->get();
-            $rank->candidates = count($candidatesRanks);
+            $positions = $this->getPostion($result->examination_id);
+
+            $candidatesRanks =  $examination->ranks;
+            $result->candidates = count($candidatesRanks);
+            $myRank=$positions->where('student_id', $result->student_id)->first();
+            $result->position = $myRank->position;
         }
 
-        return response()->json(['ranks' => $ranks], 200, [], JSON_NUMERIC_CHECK);
+
+
+        return response()->json(['results' => $results], 200);
     }
 
 
