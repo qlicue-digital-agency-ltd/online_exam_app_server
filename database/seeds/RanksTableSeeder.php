@@ -87,5 +87,48 @@ class RanksTableSeeder extends Seeder
         $rank->score = 90;
         $student = Student::find(1);
         $student->ranks()->save($rank);
+
+
+        $rank = new Rank();
+        $rank->examination_id = 2;
+        $rank->score = 56;
+        $student = Student::find(2);
+        $student->ranks()->save($rank);
+
+
+        $rank = new Rank();
+        $rank->examination_id = 2;
+        $rank->score = 73;
+        $student = Student::find(5);
+        $student->ranks()->save($rank);
+
+
+        $rank = new Rank();
+        $rank->examination_id = 3;
+        $rank->score = 66;
+        $student = Student::find(4);
+        $student->ranks()->save($rank);
+
+
+        $rank = new Rank();
+        $rank->examination_id = 3;
+        $rank->score = 55;
+        $student = Student::find(9);
+        $student->ranks()->save($rank);
+
+        $rank = new Rank();
+        $rank->examination_id = 3;
+        $rank->score = 48;
+        $student = Student::find(10);
+        $student->ranks()->save($rank);
+
+
+        $rank = new Rank();
+        $rank->examination_id = 3;
+        $rank->score = 100;
+        $student = Student::find(11);
+        $student->ranks()->save($rank);
+
+
     }
 }
