@@ -38,8 +38,8 @@ class AuthController extends Controller
             return response()->json([
                 'errors' => $validator->errors(),
                 'message' => $validator->errors()->first(),
-                'status' => false
-            ]);
+
+            ], 404);
         }
         $user = User::create([
             'phone' => $request->phone,
@@ -56,11 +56,27 @@ class AuthController extends Controller
             'token' => $token,
             'id' => auth()->user()->id,
             'phone' => auth()->user()->phone
-        ], 200, [], JSON_NUMERIC_CHECK);
+        ], 201, [], JSON_NUMERIC_CHECK);
     }
 
     public function login(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+
+            //pass validator errors as errors object for ajax response
+
+            return response()->json([
+                'errors' => $validator->errors(),
+                'message' => $validator->errors()->first(),
+
+            ], 404);
+        }
         $credentials = $request->only('phone', 'password');;
 
 

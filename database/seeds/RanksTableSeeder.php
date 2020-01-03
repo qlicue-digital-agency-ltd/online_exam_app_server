@@ -129,6 +129,12 @@ class RanksTableSeeder extends Seeder
         $student = Student::find(11);
         $student->ranks()->save($rank);
 
+        $rank = new Rank();
+        $rank->examination_id = 3;
+        $rank->score = 98;
+        $student = Student::find(6);
+        $student->ranks()->save($rank);
+
 
     }
 }
