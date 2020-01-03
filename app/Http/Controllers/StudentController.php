@@ -15,6 +15,14 @@ class StudentController extends Controller
         return response()->json(['students' => Student::all()], 200);
     }
 
+    public function getStudents($userId)
+    {
+        $user = User::find($userId);
+        if (!$user) return response()->json(['error' => 'User not found'], 404);
+
+        $students = $user->students;
+        return response()->json(['students' => $students], 200, [], JSON_NUMERIC_CHECK);
+    }
 
     // return a single student from the database
     public function getStudent($studentId)

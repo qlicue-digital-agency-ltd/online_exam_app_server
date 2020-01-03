@@ -69,6 +69,7 @@ Route::delete('rank/{rankId}', ['uses' => 'RankController@deleteRank']);
 Route::get('students', ['uses' => 'StudentController@getAllStudents']);
 Route::post('student', ['uses' => 'StudentController@postStudent']);
 Route::get('student/{studentId}', ['uses' => 'StudentController@getStudent']);
+Route::get('students/{userId}', ['uses' => 'StudentController@getStudents']);
 Route::put('student/{studentId}', ['uses' => 'StudentController@putStudent']);
 Route::delete('student/{studentId}', ['uses' => 'StudentController@deleteStudent']);
 
