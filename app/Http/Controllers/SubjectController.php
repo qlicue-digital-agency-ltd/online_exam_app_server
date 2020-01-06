@@ -9,19 +9,28 @@ use Illuminate\Support\Facades\Validator;
 class SubjectController extends Controller
 {
     // Gets all subjects from the database
-    public function getAllSubjects()
+    public function getAllSubjects($gradeId)
     {
         $subjects = Subject::all();
         foreach ($subjects as $subject) {
             $subject->examinations;
-            foreach ($subject->examinations as $examination) {
+            foreach ($subject->examinations->where('grade_id', $gradeId) as $examination) {
                 $examination->questions;
                 foreach ($examination->questions as $question) {
                     $question->answers;
                 }
             }
         }
-        return response()->json(['subjects' => $subjects], 200, [], JSON_NUMERIC_CHECK);
+
+        $filtered_subjects = $subjects->filter(function ($subject) use ($gradeId) {
+            foreach ($subject->examinations as $exam) {
+                return $exam->grade_id == $gradeId;
+            }
+        })->values();
+
+
+
+        return response()->json(['subjects' =>  $filtered_subjects], 200, [], JSON_NUMERIC_CHECK);
     }
 
 

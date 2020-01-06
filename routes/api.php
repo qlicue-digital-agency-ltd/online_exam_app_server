@@ -29,8 +29,9 @@ Route::put('grade/{gradeId}', ['uses' => 'GradeController@putGrade']);
 Route::delete('grade/{gradeId}', ['uses' => 'GradeController@deleteGrade']);
 
 ///Subjects routes
-Route::get('subjects', ['uses' => 'SubjectController@getAllSubjects']);
+
 Route::post('subject', ['uses' => 'SubjectController@postSubject']);
+Route::get('subjects/{gradeId}', ['uses' => 'SubjectController@getAllSubjects']);
 Route::get('subject/{subjectId}', ['uses' => 'SubjectController@getSubject']);
 Route::put('subject/{subjectId}', ['uses' => 'SubjectController@putSubject']);
 Route::delete('subject/{subjectId}', ['uses' => 'SubjectController@deleteSubject']);
