@@ -41,7 +41,7 @@ class StudentController extends Controller
             'grade_id' => 'required',
             'district_id' => 'required',
             'region_id' => 'required',
-            'age' => 'required',
+            'birthday' => 'required',
             'gender' => 'required',
             'school_name' => 'required',
             'user_id' => 'required',
@@ -65,13 +65,13 @@ class StudentController extends Controller
         $student->grade_id = $request->input('grade_id');
         $student->district_id = $request->input('district_id');
         $student->region_id = $request->input('region_id');
-        $student->age = $request->input('age');
+        $student->birthday = $request->input('birthday');
         $student->gender = $request->input('gender');
         $student->school_name = $request->input('school_name');
 
         $user->students()->save($student);
 
-        return  response()->json(['student' => $student], 201);
+        return  response()->json(['student' => $student], 201, [], JSON_NUMERIC_CHECK);
     }
 
     public function putStudent(Request $request, $studentId)
@@ -81,7 +81,7 @@ class StudentController extends Controller
             'grade_id' => 'required',
             'district_id' => 'required',
             'region_id' => 'required',
-            'age' => 'required',
+            'birthday' => 'required',
             'gender' => 'required',
             'school_name' => 'required',
             'user_id' => 'required',
@@ -97,7 +97,7 @@ class StudentController extends Controller
             'grade_id' => $request->input('grade_id'),
             'district_id' => $request->input('district_id'),
             'region_id' => $request->input('region_id'),
-            'age' => $request->input('age'),
+            'birthday' => $request->input('birthday'),
             'gender' => $request->input('gender'),
             'school_name' => $request->input('school_name'),
             'user_id' => $request->input('user_id')

@@ -19,7 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('gender');
-            $table->integer('age');
+            $table->dateTime('birthday');
             $table->string('school_name');
             $table->bigInteger('grade_id');
             $table->bigInteger('district_id');

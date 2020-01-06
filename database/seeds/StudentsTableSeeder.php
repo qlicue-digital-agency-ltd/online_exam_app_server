@@ -22,7 +22,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Male';
         $student->school_name = 'Doris English Medium';
 
@@ -35,7 +35,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Female';
         $student->school_name = 'Doris English Medium';
 
@@ -48,7 +48,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Male';
         $student->school_name = 'Doris English Medium';
 
@@ -62,7 +62,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Female';
         $student->school_name = 'Doris English Medium';
 
@@ -76,7 +76,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Male';
         $student->school_name = 'Doris English Medium';
 
@@ -89,7 +89,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Female';
         $student->school_name = 'Doris English Medium';
 
@@ -102,7 +102,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Male';
         $student->school_name = 'Doris English Medium';
 
@@ -115,7 +115,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Male';
         $student->school_name = 'Doris English Medium';
 
@@ -128,7 +128,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Female';
         $student->school_name = 'Doris English Medium';
 
@@ -141,7 +141,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Female';
         $student->school_name = 'Doris English Medium';
 
@@ -154,7 +154,7 @@ class StudentsTableSeeder extends Seeder
         $student->grade_id = 1;
         $student->district_id = 1;
         $student->region_id = 1;
-        $student->age = 7;
+        $student->birthday = "2009-12-31 01:51:33";
         $student->gender = 'Male';
         $student->school_name = 'Doris English Medium';
 
