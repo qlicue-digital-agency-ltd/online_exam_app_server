@@ -15,7 +15,7 @@ class CreateRanksTable extends Migration
     {
         Schema::create('ranks', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            
             $table->bigInteger('student_id');
             $table->bigInteger('examination_id');
             $table->double('score');

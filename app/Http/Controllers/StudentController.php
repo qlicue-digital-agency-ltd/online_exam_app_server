@@ -71,7 +71,7 @@ class StudentController extends Controller
 
         $user->students()->save($student);
 
-        return  response()->json(['student' => $student], 201, [], JSON_NUMERIC_CHECK);
+        return  response()->json(['student' => $student], 201, [],JSON_NUMERIC_CHECK);
     }
 
     public function putStudent(Request $request, $studentId)
