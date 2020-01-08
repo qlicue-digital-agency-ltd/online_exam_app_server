@@ -81,3 +81,14 @@ Route::post('role', ['uses' => 'RoleController@postRole']);
 Route::get('role/{roleId}', ['uses' => 'RoleController@getRole']);
 Route::put('role/{roleId}', ['uses' => 'RoleController@putRole']);
 Route::delete('role/{roleId}', ['uses' => 'RoleController@deleteRole']);
+
+
+
+///profiles routes
+Route::get('profiles', ['uses' => 'ProfileController@getAllProfiles']);
+Route::post('profile', ['uses' => 'ProfileController@postProfile']);
+Route::get('profile/{profileId}', ['uses' => 'ProfileController@getProfile']);
+Route::put('profile/{profileId}', ['uses' => 'ProfileController@putProfile']);
+Route::delete('profile/{profileId}', ['uses' => 'ProfileController@deleteProfile']);
+
+

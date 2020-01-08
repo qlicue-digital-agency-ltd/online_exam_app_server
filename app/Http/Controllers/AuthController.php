@@ -55,7 +55,8 @@ class AuthController extends Controller
         return response()->json([
             'token' => $token,
             'id' => auth()->user()->id,
-            'phone' => auth()->user()->phone
+            'phone' => auth()->user()->phone,
+            'profile' => auth()->user()->profile,
         ], 201, [], JSON_NUMERIC_CHECK);
     }
 
@@ -88,6 +89,7 @@ class AuthController extends Controller
             'token' => $token,
             'id' => auth()->user()->id,
             'phone' => auth()->user()->phone,
+            'profile' => auth()->user()->profile,
         ], 200, [], JSON_NUMERIC_CHECK);
     }
     public function logout()
