@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Request as REQ;
 
 class RoleController extends Controller
 {
@@ -12,7 +13,10 @@ class RoleController extends Controller
     // Gets all roles from the database
     public function getAllRoles()
     {
+        if (REQ::is('api/*'))
         return response()->json(['roles' => Role::all()], 200);
+
+        return view('pages.user_group',['Roles'=>Role::all()]);
     }
 
 

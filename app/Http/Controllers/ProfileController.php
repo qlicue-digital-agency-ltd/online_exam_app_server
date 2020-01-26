@@ -6,6 +6,7 @@ use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Request as REQ;
 
 class ProfileController extends Controller
 {
@@ -36,11 +37,19 @@ class ProfileController extends Controller
 
         $path = null;
 
-        if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
+        if ($validator->fails()){
+            if (REQ::is('api/*'))
+            return response()->json(['errors' => $validator->errors(),], 404);
+            return back()->with('error',$validator->errors());
+        } 
+        
 
         $user = User::find($request->input('user_id'));
-        if (!$user) return response()->json(['error' => 'Parent not found'], 404);
-
+        if (!$user) {
+            if (REQ::is('api/*'))
+            return response()->json(['error' => 'Parent not found'], 404);
+            return back()->with('error','user not found');
+        }
         if ($request->hasFile('file')) {
             $path = $request->file('file')->store('profile');
         }
@@ -53,8 +62,9 @@ class ProfileController extends Controller
         $profile->gender = $request->input('gender');
 
         $user->profile()->save($profile);
-
+        if (REQ::is('api/*'))
         return  response()->json(['profile' => $profile], 201, [], JSON_NUMERIC_CHECK);
+        return redirect('/home');
     }
 
     public function putProfile(Request $request, $profileId)

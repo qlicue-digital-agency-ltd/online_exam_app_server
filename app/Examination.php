@@ -16,12 +16,12 @@ class Examination extends Model
 
     public function subjects()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Subject::class,'subject_id','id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'teacher_id','id');
     }
 
     public function questions()
@@ -36,6 +36,6 @@ class Examination extends Model
 
     public function grade()
     {
-        return $this->belongsTo(Grade::class);
+        return $this->belongsTo(Grade::class,'grade_id','id');
     }
 }

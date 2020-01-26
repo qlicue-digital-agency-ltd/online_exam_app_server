@@ -6,13 +6,16 @@ use App\Examination;
 use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Request as REQ;
 
 class QuestionController extends Controller
 {
     // Gets all questions from the database
     public function getAllQuestions()
     {
+        if (REQ::is('api/*'))
         return response()->json(['questions' => Question::all()], 200);
+        return view('pages.question',['Questions'=>Question::all(),'Examination'=>Examination::all()]);
     }
 
 
