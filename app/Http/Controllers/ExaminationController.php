@@ -98,7 +98,7 @@ class ExaminationController extends Controller
         if (!$examination) 
         return back()->with('error','Exam not found');
 
-        return view('pages.create_exam',['examination'=>$examination]);
+        return view('pages.create_exam',['examination'=>$examination , 'questions'=>$examination->questions()->get() ] );
         
 
 

@@ -86,6 +86,7 @@ class QuestionController extends Controller
 
         $question->delete();
         return response()->json(['message' => 'Question deleted Successfully'], 201);
+        return back()->with('msg','Question deleted Successfully');
     }
 
     public function viewFile($questionId)

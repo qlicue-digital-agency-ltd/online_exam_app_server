@@ -245,7 +245,7 @@
                         <th>Question_Id</th>
                         <th>Question_No</th>
                         <th>Question_Content</th>
-						<th>Examination_Id</th>
+						      <th>Examination_Id</th>
                         <th>Created_at</th>
                         <th>Actions</th>
                     </tr>
@@ -260,9 +260,11 @@
                         <td>{{$Question->examination_id}}</td>
                         <td>{{$Question->created_at}}</td>
                         <td>
-                            <a href="#editQuestionModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteQuestionModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
+                            <a href="/question{{$Question->id}}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            
+                            <a href="#deleteQuestionModal" class="delete" data-toggle="modal" data-question="{{$Question}}" data-question_name="{{$Question->id}}"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            
+                   </td>
                     </tr> 
                     @endforeach
                
@@ -290,7 +292,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add Question</h4>
         </div>
-        <form method="POST" action="" accept-charset="UTF-8" enctype="multipart/form-data"><input name="content" type="hidden" value="">
+      <form method="POST" action="{{route('question')}}" ><input name="examination_id" type="hidden" value="">
           <div class="modal-body">
             <div class="row">
               <div class="col-md-4">
@@ -363,7 +365,7 @@
       </div>
     </div>
     </div>
-	<!-- Edit Modal HTML -->
+	{{-- <!-- Edit Modal HTML -->
 	<div id="editQuestionModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -397,7 +399,8 @@
 				</form>
 			</div>
 		</div>
-	</div>
+   </div> --}}
+   
 	<!-- Delete Modal HTML -->
 	<div id="deleteQuestionModal" class="modal fade">
 		<div class="modal-dialog">
@@ -411,7 +414,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
-						<p>Are you sure you want to delete these Records?</p>
+						<p>Are you sure you want to delete this Question ?</p>
 						<p class="text-warning"><small>This action cannot be undone.</small></p>
 					</div>
 					<div class="modal-footer">
