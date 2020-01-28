@@ -365,41 +365,7 @@
       </div>
     </div>
     </div>
-	{{-- <!-- Edit Modal HTML -->
-	<div id="editQuestionModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Edit Question</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">					
-						<div class="form-group">
-							<label>Name</label>
-							<input type="text" class="form-control" required>
-						</div>
-						<div class="form-group">
-							<label>Email</label>
-							<input type="email" class="form-control" required>
-						</div>
-						<div class="form-group">
-							<label>Address</label>
-							<textarea class="form-control" required></textarea>
-						</div>
-						<div class="form-group">
-							<label>Phone</label>
-							<input type="text" class="form-control" required>
-						</div>					
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-info" value="Save">
-					</div>
-				</form>
-			</div>
-		</div>
-   </div> --}}
+	
    
 	<!-- Delete Modal HTML -->
 	<div id="deleteQuestionModal" class="modal fade">
@@ -409,7 +375,7 @@
                     @method('delete')
                     @csrf
 					<div class="modal-header">
-                        <h2 class="questionName"></h2>						
+                        <h2 class="questionNumber"></h2>						
 						<h4 class="modal-title">Delete Question</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
@@ -463,13 +429,13 @@
 $('#deleteQuestionModal').on('show.bs.modal', function (event) {
      var button = $(event.relatedTarget) // Button that triggered the modal
      var question = button.data('question') // Extract info from data-* attributes
-     var question_name = button.data('question_name')
+     var question_number = button.data('question_number')
      
 
      var modal = $(this)
      // modal.find('.modal-title').text('Delete Message !' )
      modal.find('#deleteForm').attr('action','/delete/question/'+ question['id']) 
-     modal.find('.questionName').text(question_name)
+     modal.find('.questionNumber').text(question_number)
 
  });
 </script>

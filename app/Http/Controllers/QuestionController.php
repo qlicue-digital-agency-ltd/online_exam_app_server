@@ -15,7 +15,7 @@ class QuestionController extends Controller
     {
         if (REQ::is('api/*'))
         return response()->json(['questions' => Question::all()], 200);
-        return view('pages.question',['Questions'=>Question::all(),'Examination'=>Examination::all()]);
+        return view('pages.create_exam',['questions'=>question::all(),'answers'=>answer::all()]);
     }
 
 
@@ -55,8 +55,9 @@ class QuestionController extends Controller
         $question->image = $path;
 
         $examination->questions()->save($question);
-
+        if (REQ::is('api/*'))
         return  response()->json(['question' => $question], 201);
+        return view('pages.create_exam',['questions'=>question::all(),'answers'=>answer::all()]);
     }
 
     public function putQuestion(Request $request, $questionId)
@@ -75,7 +76,7 @@ class QuestionController extends Controller
             'content' => $request->input('name'),
             'number' => $request->input('number')
         ]);
-
+             
         return response()->json(['question' => $question], 201);
     }
 
@@ -85,6 +86,7 @@ class QuestionController extends Controller
         if (!$question) return response()->json(['error' => 'Question not found'], 404);
 
         $question->delete();
+        if (REQ::is('api/*'))
         return response()->json(['message' => 'Question deleted Successfully'], 201);
         return back()->with('msg','Question deleted Successfully');
     }

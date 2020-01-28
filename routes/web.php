@@ -32,9 +32,6 @@ Route::get('/register', function () {
    return view('pages.register');
 });
 
-Route::get('/delete/user/{userId}','AuthController@delete')->name('user.delete');
-
- Route::get('/delete/examination/{examinationId}','ExaminationController@deleteExamination')->name('examiantion.delete');
 
  Route::post('/profile','ProfileController@postProfile')->name('profile');
  Route::get('/profile', function () {
@@ -49,6 +46,8 @@ Route::get('/users', 'AuthController@getAllUsers');
 
  Route::get('/user_group', 'RoleController@getAllRoles');
 
+ Route::get('/delete/user/{userId}','AuthController@delete')->name('user.delete');
+
 
 //------------------- EXAMS ROOTS------------------//
 
@@ -57,6 +56,7 @@ Route::get('/users', 'AuthController@getAllUsers');
 Route::Post('/create/exam', 'ExaminationController@postExamination' )->name('create.exam');
 Route::get('/exams', 'ExaminationController@getAllExaminations');
 Route::get('/create/exam/{examinationId}', 'ExaminationController@createExam')->name('view.exam');
+Route::get('/delete/examination/{examinationId}','ExaminationController@deleteExamination')->name('examiantion.delete');
 
 
 // ------------------- QUESTIONS ROOTS-----------------//
@@ -64,7 +64,12 @@ Route::get('/create/exam/{examinationId}', 'ExaminationController@createExam')->
 
 Route::get('/question', 'QuestionController@getAllQuestions');
 Route::Post('/question', 'QuestionController@postQuestion' )->name('question');
+Route::get('/create/exam/{questionId}', 'QuestionController@addQuestion')->name('view.question');
+Route::get('/delete/question/{questionId}','QuestionController@deleteQuestion')->name('question.delete');
 
+
+// ------------------ ANSWERS ROOTS-----------------------//
+Route::Post('create/exam/{examinationId}/{question}/', 'AnswersController@postAnswer')->name('answer');
 
 // ------------------ DASHBOARD ROOTS-------------------//
 

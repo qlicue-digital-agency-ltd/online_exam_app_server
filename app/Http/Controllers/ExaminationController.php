@@ -64,8 +64,8 @@ class ExaminationController extends Controller
         event(new ExaminationHasBeenCreatedEvent($examination, $subject->code));
         if (REQ::is('api/*'))
         return  response()->json(['examination' => $examination], 201);
-        return redirect ('/create/exam/'.$examination->id);
-        
+        // return redirect ('/create/exam/'.$examination->id);
+        return back();
     }
 
     public function putExamination(Request $request, $examinationId)

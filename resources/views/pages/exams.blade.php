@@ -222,10 +222,7 @@
                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 @endsection
 @section('contents')    
-
-       
-                  
-
+                       
 <body>
        <div class="container">
            <div class="table-wrapper">
@@ -236,7 +233,7 @@
                                       </div>
                                       <div class="col-sm-6">
                                              <a href="#addExaminationModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span href="/create_exam">Add New Examination</span></a>
-                                             <a href="#deleteExaminationModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                                             {{-- <a href="#deleteExaminationModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						 --}}
                                       </div>
                    </div>
                </div>

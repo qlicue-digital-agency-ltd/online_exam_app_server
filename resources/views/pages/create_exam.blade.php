@@ -235,8 +235,8 @@
           <h2 class="text-uppercase">{{$examination->grade()->get()->first()->name}}<b> {{$examination->subjects()->get()->first()->name}}</b></h2>
         </div>
         <div class="col-sm-6">
-          <a href="#addQuestionModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Question</span></a>
-          <a href="#deleteQuestionModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+          <a href="#addQuestionModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span href="create_exam">Add Question</span></a>
+          {{-- <a href="#deleteQuestionModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						 --}}
         </div>
               </div>
           </div>
@@ -256,16 +256,22 @@
                       <td>{{$question->number}}</td>
                       <td>{{$question->content}}
                       <div class="row p-2 mb-2" style="background-color:lightgray">
-                        <div class="col">A: 5 </div>
-                        <div class="col">B: 6</div>
-                        <div class="col">C: 2</div>
-                        <div class="col">D: 1</div>
+                        @foreach ($question->answers as $answer)
+                        <div class="col">
+                          {{$answer->alphabet}}:
+                          {{$answer->content}} 
+                          @if($answer->is_correct)
+                          <i class="fas fa-check " style="color:green; horizontal-align:middle" ></i>
+                          @endif
+                        </div>
+                        @endforeach
                     </div>
                       </td>
                       
                       <td>
-                          <a href="#editQuestionModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                          <a href="#deleteQuestionModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                          
+                          {{-- <a href="#deleteQuestionModal" class="delete" data-toggle="modal" data-question="{{$question}}" data-question_number="{{$question->number}}"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a> --}}
+                          <a href="editQuestionModal" class="edit" data-toggle="modal" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                       </td>
                   </tr>
                   @endforeach
@@ -293,15 +299,20 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Question</h4>
       </div>
-    <form method="POST" action="{{route('question')}}" ><input name="question_id" type="hidden" value="">
+    <form method="POST" action="{{route('question')}}" ><input name="examination_id"  type="hidden" value="{{$examination->id}}">
+    {{-- <label for="question_number">Question No</label><input name="question_number" value="{{$question->number}}"> --}}
+    {{-- <div class="form-group"> --}}
+      {{-- <label>Question Number</label>
+    <input name="question_number" type="number" value="{{$question->id}}" class="form-control" required>
+</div> --}}
         <div class="modal-body">
           <div class="row">
             <div class="col-md-4">
-              <input name="topic_id" type="hidden" value="1">
+            <input name="question" type="hidden" value="1">
               <div class="form-group">                  
-                <label for="question">Question</label>
+                <label for="questions">Question</label>
                 <span class="required">*</span>
-                <textarea class="form-control" placeholder="Please Enter Question" rows="8" required="required" name="question" cols="50" id="question"></textarea>
+                <textarea class="form-control" placeholder="Please Enter Question" rows="8" required="required" name="content" cols="50" value=""></textarea>
                 <small class="text-danger"></small>
               </div>
               <div class="form-group">
@@ -367,51 +378,22 @@
   </div>
   </div>
 <!-- Edit Modal HTML -->
-<div id="editQuestionModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">						
-          <h4 class="modal-title">Edit Question</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">					
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Address</label>
-            <textarea class="form-control" required></textarea>
-          </div>
-          <div class="form-group">
-            <label>Phone</label>
-            <input type="text" class="form-control" required>
-          </div>					
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-info" value="Save">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+
 <!-- Delete Modal HTML -->
 <div id="deleteQuestionModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form>
+
+      <form method="deleteForm">
+        @method('delete')
+        @csrf
         <div class="modal-header">						
           <h4 class="modal-title">Delete Question</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
-        <div class="modal-body">					
-          <p>Are you sure you want to delete these Records?</p>
+        <div class="modal-body">		
+          <h2 class="questionNumber"></h2>			
+          <p>Are you sure you want to delete this question?</p>
           <p class="text-warning"><small>This action cannot be undone.</small></p>
         </div>
         <div class="modal-footer">
@@ -453,16 +435,16 @@
            });
         });
         
-$('#deleteExaminationModal').on('show.bs.modal', function (event) {
+    $('#deleteQuestionModal').on('show.bs.modal', function (event) {
      var button = $(event.relatedTarget) // Button that triggered the modal
-     var examination = button.data('examination') // Extract info from data-* attributes
-     var examination_name = button.data('examination_name')
+     var question = button.data('question') // Extract info from data-* attributes
+     var question_number = button.data('question_number')
      
 
      var modal = $(this)
      // modal.find('.modal-title').text('Delete Message !' )
-     modal.find('#deleteForm').attr('action','/delete/examination/'+ examination['id']) 
-     modal.find('.examinationName').text(examination_name)
+     modal.find('#deleteForm').attr('action','/delete/question/'+ question['id']) 
+     modal.find('.questionNumber').text(question_number)
 
  });
 </script>

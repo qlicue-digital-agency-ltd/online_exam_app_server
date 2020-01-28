@@ -6,6 +6,7 @@ use App\Answer;
 use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Request as REQ;
 
 class AnswerController extends Controller
 {
@@ -50,6 +51,7 @@ class AnswerController extends Controller
         $question->answers()->save($answer);
 
         return  response()->json(['answer' => $answer], 201);
+        return view('pages.create_exam',['examination'=>$examination , 'questions'=>$examination->questions()->get(), 'answers'=>$question->answers()->get() ] );
     }
 
     public function putAnswer(Request $request, $answerId)

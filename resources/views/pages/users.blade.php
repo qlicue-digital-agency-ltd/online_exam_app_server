@@ -239,7 +239,7 @@
                               </div>
                               <div class="col-sm-6">
                                  <a href="#addUserModal" class="btn btn-primary" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
-                                 <a href="#deleteUserModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                                 {{-- <a href="#deleteUserModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						 --}}
                               </div>
                                </div>
                            </div>
@@ -272,14 +272,12 @@
                                  </td>
                                        <td>{{$user->id}}</td>
                                        <td>{{$user->profile()->get()->first()['name']}}</td>
-                                 <td>{{$user->phone}}</td>
-                                 <td>{{$user->profile()->get()->first()['email']}}</td>
-                                 <td>{{$user->profile()->get()->first()['gender']}}</td>
+                                       <td>{{$user->phone}}</td>
+                                       <td>{{$user->profile()->get()->first()['email']}}</td>
+                                       <td>{{$user->profile()->get()->first()['gender']}}</td>
                                        <td>
                                            <a href="#editUserModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
-                                           {{-- <a href="{{route('user.delete',$user->id)}}" class="delete" ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a> --}}
-
-                                        <a href="#deleteUserModal" class="delete" data-toggle="modal" data-user="{{$user}}" data-user_name="{{$user->profile()->get()->first()['name']}}">
+                                           <a href="#deleteUserModal" class="delete" data-toggle="modal" data-user="{{$user}}" data-user_name="{{$user->profile()->get()->first()['name']}}">
                                           <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                        </a> 
                                        </td>
@@ -467,7 +465,7 @@
             var user = button.data('user') // Extract info from data-* attributes
             var user_name = button.data('user_name')
             
-           .
+           
             var modal = $(this)
             // modal.find('.modal-title').text('Delete Message !' )
             modal.find('#deleteForm').attr('action','/delete/user/'+ user['id']) 
