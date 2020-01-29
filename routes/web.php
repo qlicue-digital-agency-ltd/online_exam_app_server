@@ -63,7 +63,7 @@ Route::get('/delete/examination/{examinationId}','ExaminationController@deleteEx
 
 
 Route::get('/question', 'QuestionController@getAllQuestions');
-Route::Post('/question', 'QuestionController@postQuestion' )->name('question');
+Route::Post('/question', 'QuestionController@postQuestionWithAnswers')->name('question');
 Route::get('/create/exam/{questionId}', 'QuestionController@addQuestion')->name('view.question');
 Route::get('/delete/question/{questionId}','QuestionController@deleteQuestion')->name('question.delete');
 

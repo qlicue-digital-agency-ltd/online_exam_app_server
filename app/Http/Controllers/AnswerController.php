@@ -51,7 +51,7 @@ class AnswerController extends Controller
         $question->answers()->save($answer);
 
         return  response()->json(['answer' => $answer], 201);
-        return view('pages.create_exam',['examination'=>$examination , 'questions'=>$examination->questions()->get(), 'answers'=>$question->answers()->get() ] );
+        
     }
 
     public function putAnswer(Request $request, $answerId)

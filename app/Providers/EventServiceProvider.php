@@ -22,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ExaminationHasBeenCreatedEvent' => [
             'App\Listeners\GenerateExaminationNumberListener',
         ],
+        'App\Events\QuestionHasBeenCreatedEvent' => [
+            'App\Listeners\PostQuestionAnswerListener',
+        ],
     ];
 
     /**

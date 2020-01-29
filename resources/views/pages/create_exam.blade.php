@@ -301,10 +301,10 @@
       </div>
     <form method="POST" action="{{route('question')}}" ><input name="examination_id"  type="hidden" value="{{$examination->id}}">
     {{-- <label for="question_number">Question No</label><input name="question_number" value="{{$question->number}}"> --}}
-    {{-- <div class="form-group"> --}}
-      {{-- <label>Question Number</label>
-    <input name="question_number" type="number" value="{{$question->id}}" class="form-control" required>
-</div> --}}
+    <div class="form-group"> 
+       <label>Question Number</label> 
+    <input name="number" type="number" value="{{count($questions)+ 1}}" class="form-control" required>
+</div>
         <div class="modal-body">
           <div class="row">
             <div class="col-md-4">
@@ -318,7 +318,7 @@
               <div class="form-group">
                   <label for="answer">Correct Answer</label>
                   <span class="required">*</span>
-                  <select class="form-control select2" required="required" id="answer" name="answer"><option selected="selected" value=""></option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select>
+                  <select class="form-control select2" required="required" id="answer" name="is_correct"><option selected="selected" value=""></option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select>
                   <small class="text-danger"></small>
               </div>
             </div>
@@ -326,25 +326,25 @@
               <div class="form-group">
                 <label for="a">A - Option</label>
                 <span class="required">*</span>
-                <input class="form-control" placeholder="Please Enter A Option" required="required" name="a" type="text" id="a">
+                <input class="form-control" placeholder="Please Enter A Option" required="required" name="a_content" type="text" id="a">
                 <small class="text-danger"></small>
               </div>
               <div class="form-group">
                 <label for="b">B - Option</label>
                 <span class="required">*</span>
-                <input class="form-control" placeholder="Please Enter B Option" required="required" name="b" type="text" id="b">
+                <input class="form-control" placeholder="Please Enter B Option" required="required" name="b_content" type="text" id="b">
                 <small class="text-danger"></small>
               </div>
               <div class="form-group">
                 <label for="c">C - Option</label>
                 <span class="required">*</span>
-                <input class="form-control" placeholder="Please Enter C Option" required="required" name="c" type="text" id="c">
+                <input class="form-control" placeholder="Please Enter C Option" required="required" name="c_content" type="text" id="c">
                 <small class="text-danger"></small>
               </div>
               <div class="form-group">
                 <label for="d">D - Option</label>
                 <span class="required">*</span>
-                <input class="form-control" placeholder="Please Enter D Option" required="required" name="d" type="text" id="d">
+                <input class="form-control" placeholder="Please Enter D Option" required="required" name="d_content" type="text" id="d">
                 <small class="text-danger"></small>
               </div>
             </div>
