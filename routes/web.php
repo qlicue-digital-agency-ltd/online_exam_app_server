@@ -48,13 +48,14 @@ Route::get('/users', 'AuthController@getAllUsers');
 
  Route::get('/delete/user/{userId}','AuthController@delete')->name('user.delete');
 
+ Route::get('/edit/user/{userId}','AuthController@delete')->name('user.delete');
+
 
 //------------------- EXAMS ROOTS------------------//
 
 
-
-Route::Post('/create/exam', 'ExaminationController@postExamination' )->name('create.exam');
 Route::get('/exams', 'ExaminationController@getAllExaminations');
+Route::Post('/create/exam', 'ExaminationController@postExamination' )->name('create.exam');
 Route::get('/create/exam/{examinationId}', 'ExaminationController@createExam')->name('view.exam');
 Route::get('/delete/examination/{examinationId}','ExaminationController@deleteExamination')->name('examiantion.delete');
 
@@ -64,11 +65,12 @@ Route::get('/delete/examination/{examinationId}','ExaminationController@deleteEx
 
 Route::get('/question', 'QuestionController@getAllQuestions');
 Route::Post('/question', 'QuestionController@postQuestionWithAnswers')->name('question');
-Route::get('/create/exam/{questionId}', 'QuestionController@addQuestion')->name('view.question');
-Route::get('/delete/question/{questionId}','QuestionController@deleteQuestion')->name('question.delete');
+Route::Post('/create/exam/{examinationId}', 'QuestionController@postQuestion')->name('update.question');
+// Route::get('/delete/question/{questionId}','QuestionController@deleteQuestion')->name('question.delete');
 
 
 // ------------------ ANSWERS ROOTS-----------------------//
+
 Route::Post('create/exam/{examinationId}/{question}/', 'AnswersController@postAnswer')->name('answer');
 
 // ------------------ DASHBOARD ROOTS-------------------//

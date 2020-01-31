@@ -37,6 +37,7 @@ class QuestionController extends Controller
             'content' => 'required',
             'number' => 'required',
             'examination_id' => 'required',
+            
         ]);
         $path = null;
 
@@ -69,6 +70,13 @@ class QuestionController extends Controller
         $validator = Validator::make($request->all(), [
             'content' => 'required',
             'number' => 'required',
+            'examination_id' => 'required',
+            'a_content' => 'required',
+            'b_content' => 'required',
+            'c_content' => 'required',
+            'd_content' => 'required',
+            'is_correct' => 'required',
+            
         ]);
 
         if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
@@ -78,10 +86,18 @@ class QuestionController extends Controller
 
         $question->update([
             'content' => $request->input('name'),
-            'number' => $request->input('number')
+            'number' => $request->input('number'),
+            'examination_id' => $request->input('name'),
+            'a_content' => $request->input('name'),
+            'b_content' => $request->input('name'),
+            'c_content' => $request->input('name'),
+            'd_content' => $request->input('name'),
+            'is_correct' => $request->input('name'),
+            
         ]);
-             
+        if (REQ::is('api/*'))
         return response()->json(['question' => $question], 201);
+        return back()->with('msg','Question deleted Successfully');
     }
 
     public function deleteQuestion($questionId)

@@ -271,7 +271,9 @@
                       <td>
                           
                           {{-- <a href="#deleteQuestionModal" class="delete" data-toggle="modal" data-question="{{$question}}" data-question_number="{{$question->number}}"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a> --}}
-                          <a href="editQuestionModal" class="edit" data-toggle="modal" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                          {{-- <a href="/create/exam/{{$examination->id}}/{{$question}}/{{$question->number}}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> --}}
+                          {{-- <a href="/create/exam/{{$examination->id}}/{{$question->id}}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> --}}
+                      <a href="#editQuestionModal" class="edit" data-toggle="modal" data-question="{{$question}}" data-question_number="{{$question->number}}"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
                       </td>
                   </tr>
                   @endforeach
@@ -300,7 +302,7 @@
         <h4 class="modal-title">Add Question</h4>
       </div>
     <form method="POST" action="{{route('question')}}" ><input name="examination_id"  type="hidden" value="{{$examination->id}}">
-    {{-- <label for="question_number">Question No</label><input name="question_number" value="{{$question->number}}"> --}}
+
     <div class="form-group"> 
        <label>Question Number</label> 
     <input name="number" type="number" value="{{count($questions)+ 1}}" class="form-control" required>
@@ -357,7 +359,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="question_img">Add Image To Question</label>
-                      <input name="question_img" type="file" id="question_img">
+                      <input method="Post" name="image" type="file" id="image">
                       <small class="text-danger"></small>
                        <p class="help">Please Choose Only .JPG, .JPEG and .PNG</p>
                     </div>
@@ -378,6 +380,93 @@
   </div>
   </div>
 <!-- Edit Modal HTML -->
+
+
+<div id="editQuestionModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Question</h4>
+      </div>
+        <form action="" method="POST">
+        @csrf
+        @method('PUT')
+    
+        <div class="modal-body">
+          <h2 class="questionNumber"></h2>
+          <div class="row">
+            <div class="col-md-4">
+            <input name="question" type="hidden" value="1">
+              <div class="form-group">                  
+                <label for="questions">Question</label>
+                <span class="required">*</span>
+                <textarea class="form-control" placeholder="Please Enter Question" rows="8" required="required" name="content" cols="50" value=""></textarea>
+                <small class="text-danger"></small>
+              </div>
+              <div class="form-group">
+                  <label for="answer">Correct Answer</label>
+                  <span class="required">*</span>
+                  <select class="form-control select2" required="required" id="answer" name="is_correct"><option selected="selected" value=""></option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select>
+                  <small class="text-danger"></small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="a">A - Option</label>
+                <span class="required">*</span>
+                <input class="form-control" placeholder="Please Enter A Option" required="required" name="a_content" type="text" id="a">
+                <small class="text-danger"></small>
+              </div>
+              <div class="form-group">
+                <label for="b">B - Option</label>
+                <span class="required">*</span>
+                <input class="form-control" placeholder="Please Enter B Option" required="required" name="b_content" type="text" id="b">
+                <small class="text-danger"></small>
+              </div>
+              <div class="form-group">
+                <label for="c">C - Option</label>
+                <span class="required">*</span>
+                <input class="form-control" placeholder="Please Enter C Option" required="required" name="c_content" type="text" id="c">
+                <small class="text-danger"></small>
+              </div>
+              <div class="form-group">
+                <label for="d">D - Option</label>
+                <span class="required">*</span>
+                <input class="form-control" placeholder="Please Enter D Option" required="required" name="d_content" type="text" id="d">
+                <small class="text-danger"></small>
+              </div>
+            </div>
+           
+            <div class="col-md-12">
+              <div class="extras-block">
+                <h4 class="extras-heading">An Image For Question</h4>
+                <div class="row">
+                  
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="question_img">Add Image To Question</label>
+                      <input method="Post" name="image" type="file" id="image">
+                      <small class="text-danger"></small>
+                       <p class="help">Please Choose Only .JPG, .JPEG and .PNG</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group pull-right">
+            <input class="btn btn-default" type="reset" value="Reset">
+            <input class="btn btn-wave" type="submit" value="Save">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+
 
 <!-- Delete Modal HTML -->
 <div id="deleteQuestionModal" class="modal fade">
@@ -435,17 +524,16 @@
            });
         });
         
-    $('#deleteQuestionModal').on('show.bs.modal', function (event) {
+    $('#editQuestionModal').on('show.bs.modal', function (event) {
      var button = $(event.relatedTarget) // Button that triggered the modal
      var question = button.data('question') // Extract info from data-* attributes
      var question_number = button.data('question_number')
      
 
      var modal = $(this)
-     // modal.find('.modal-title').text('Delete Message !' )
-     modal.find('#deleteForm').attr('action','/delete/question/'+ question['id']) 
+     // modal.find('.modal-title').text('Edit Message !' )
+     modal.find('#editForm').attr('action','/edit/question/'+ question['id']) 
      modal.find('.questionNumber').text(question_number)
-
  });
 </script>
 @endsection

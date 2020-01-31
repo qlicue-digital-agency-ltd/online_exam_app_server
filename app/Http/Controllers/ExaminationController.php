@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-// use App\Events\ExaminationHasBeenCreatedEvent;
+use App\Events\ExaminationHasBeenCreatedEvent;
 use App\Examination;
 use App\Subject;
 use App\Grade;
@@ -61,7 +61,8 @@ class ExaminationController extends Controller
 
         $subject->examinations()->save($examination);
 
-        // event(new ExaminationHasBeenCreatedEvent($examination, $subject->code));
+        event(new ExaminationHasBeenCreatedEvent($examination, $subject->code));
+        event(new ExaminationHasBeenCreatedEvent($examination, $subject->code));
         if (REQ::is('api/*'))
         return  response()->json(['examination' => $examination], 201);
         // return redirect ('/create/exam/'.$examination->id);

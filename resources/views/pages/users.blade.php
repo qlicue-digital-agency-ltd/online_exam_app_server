@@ -276,7 +276,7 @@
                                        <td>{{$user->profile()->get()->first()['email']}}</td>
                                        <td>{{$user->profile()->get()->first()['gender']}}</td>
                                        <td>
-                                           <a href="#editUserModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
+                                           {{-- <a href="#editUserModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>  --}}
                                            <a href="#deleteUserModal" class="delete" data-toggle="modal" data-user="{{$user}}" data-user_name="{{$user->profile()->get()->first()['name']}}">
                                           <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                        </a> 
@@ -286,18 +286,7 @@
                                    
                                </tbody>
                            </table>
-                        <div class="clearfix">
-                               <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                               <ul class="pagination">
-                                   <li class="page-item disabled"><a href="#">Previous</a></li>
-                                   <li class="page-item"><a href="#" class="page-link">1</a></li>
-                                   <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                   <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                                   <li class="page-item"><a href="#" class="page-link">4</a></li>
-                                   <li class="page-item"><a href="#" class="page-link">5</a></li>
-                                   <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                               </ul>
-                           </div>
+                        
                        </div>
                    </div>
                   <!-- Edit Modal HTML -->
@@ -335,7 +324,7 @@
                         </div>
                      </div>
                   </div>
-                  <!-- Edit Modal HTML -->
+                  {{-- <!-- Edit Modal HTML -->
                   <div id="editUserModal" class="modal fade">
                      <div class="modal-dialog">
                         <div class="modal-content">
@@ -369,7 +358,7 @@
                            </form>
                         </div>
                      </div>
-                  </div>
+                  </div> --}}
                   <!-- Delete Modal HTML -->
                   <div id="deleteUserModal" class="modal fade">
                      <div class="modal-dialog">

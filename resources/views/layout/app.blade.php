@@ -78,7 +78,7 @@
             <h6 class="collapse-header">Custom Users:</h6>
             <a class="collapse-item" href="/users">User</a>
             <a class="collapse-item" href="/user_group">User Group</a>
-            <a class="collapse-item" href="/cards">Password</a>
+            {{-- <a class="collapse-item" href="/cards">Password</a> --}}
           </div>
         </div>
       </li>
