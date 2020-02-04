@@ -273,7 +273,7 @@
                           {{-- <a href="#deleteQuestionModal" class="delete" data-toggle="modal" data-question="{{$question}}" data-question_number="{{$question->number}}"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a> --}}
                           {{-- <a href="/create/exam/{{$examination->id}}/{{$question}}/{{$question->number}}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> --}}
                           {{-- <a href="/create/exam/{{$examination->id}}/{{$question->id}}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> --}}
-                      <a href="#editQuestionModal" class="edit" data-toggle="modal" data-question="{{$question}}" data-question_number="{{$question->number}}"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
+                      <a href="#editQuestionModal" class="edit" data-toggle="modal" data-question="{{$question}}"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
                       </td>
                   </tr>
                   @endforeach
@@ -301,7 +301,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Question</h4>
       </div>
-    <form method="POST" action="{{route('question')}}" ><input name="examination_id"  type="hidden" value="{{$examination->id}}">
+    <form method="POST" action="{{route('question')}}" enctype="multipart/form-data" ><input name="examination_id"  type="hidden" value="{{$examination->id}}">
 
     <div class="form-group"> 
        <label>Question Number</label> 
@@ -359,7 +359,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="question_img">Add Image To Question</label>
-                      <input method="Post" name="image" type="file" id="image">
+                      <input name="file" type="file" id="image">
                       <small class="text-danger"></small>
                        <p class="help">Please Choose Only .JPG, .JPEG and .PNG</p>
                     </div>
@@ -397,7 +397,7 @@
           <h2 class="questionNumber"></h2>
           <div class="row">
             <div class="col-md-4">
-            <input name="question" type="hidden" value="1">
+            <input name="question" type="hidden" value="">
               <div class="form-group">                  
                 <label for="questions">Question</label>
                 <span class="required">*</span>
@@ -446,7 +446,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="question_img">Add Image To Question</label>
-                      <input method="Post" name="image" type="file" id="image">
+                      <input name="file" type="file" id="image">
                       <small class="text-danger"></small>
                        <p class="help">Please Choose Only .JPG, .JPEG and .PNG</p>
                     </div>
@@ -527,13 +527,13 @@
     $('#editQuestionModal').on('show.bs.modal', function (event) {
      var button = $(event.relatedTarget) // Button that triggered the modal
      var question = button.data('question') // Extract info from data-* attributes
-     var question_number = button.data('question_number')
+    //  var question_number = button.data('question_number')
      
 
      var modal = $(this)
      // modal.find('.modal-title').text('Edit Message !' )
      modal.find('#editForm').attr('action','/edit/question/'+ question['id']) 
-     modal.find('.questionNumber').text(question_number)
+     modal.find('.questionNumber').text(question['number'])
  });
 </script>
 @endsection

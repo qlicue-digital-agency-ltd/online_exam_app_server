@@ -18,16 +18,21 @@ Route::get('/forgot-password', function () {
    return view('pages.forgot-password');
 });
 
-Route::post('/login', 'AuthController@authenticate')->name('login');
+Route::post('/user/login', 'AuthController@authenticate')->name('user.login');
+
 Route::get('/', function () {
   return view('pages.login');
 
 });
+
 Route::get('/login', function () {
    return view('pages.login');
+ 
+ })->name('login');
 
-});
+
 Route::post('/register', 'AuthController@register');
+
 Route::get('/register', function () {
    return view('pages.register');
 });
@@ -36,7 +41,8 @@ Route::get('/register', function () {
  Route::post('/profile','ProfileController@postProfile')->name('profile');
  Route::get('/profile', function () {
    return view('pages.profile');
-})->middleware('auth');
+});
+// ->middleware('auth');
 
 
 // ----------------- USER ROOTS-------------------//

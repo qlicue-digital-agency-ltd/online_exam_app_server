@@ -47,7 +47,7 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome to SPE</h1>
                   </div>
-                  <form  action="/login" method="POST" class="user">
+                  <form  action="{{route('user.login')}}" method="POST" class="user">
                     @csrf
                     <div class="form-group">
                       <input name="phone" type="phone" class="form-control form-control-user" id="Phone no" aria-describedby="pnoneHelp" placeholder="Phone Number...">

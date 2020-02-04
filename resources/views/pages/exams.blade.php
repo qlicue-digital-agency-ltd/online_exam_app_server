@@ -300,9 +300,7 @@
                                                         @foreach ($subjects as $subject)
                                                     <option value="{{$subject->id}}">{{$subject->name}}</option>  
                                                         @endforeach
-                                                       
                                                         
-                                                         
                                                       </select>
                                              </div>
                                              <div class="form-group">
@@ -311,9 +309,7 @@
                                                         <option>Select</option>
                                                         @foreach ($grades as $grade)
                                                         <option value="{{$grade->id}}">{{$grade->id}}</option>  
-                                                        @endforeach
-                                                        
-                                                        
+                                                        @endforeach 
                                                       </select>
                                              </div>
                                        

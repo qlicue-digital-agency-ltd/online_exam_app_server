@@ -36,26 +36,32 @@
     <!-- Outer Row -->
     <div class="row justify-content-center">
 
-      <div class="col-xl-10 col-lg-12 col-md-9">
+      <div class="col-xl-6 col-lg-12 col-md-9">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
-            <form  action="{{route('profile')}}" method="POST" class="profile">
+            <form  action="{{route('profile')}}" method="POST" class="profile" enctype="multipart/form-data">
                 @csrf
+                
             <div class="form-group">
                 <label>Name</label>
                 <input name="name" type="text"  class="form-control" required>
-             </div>
+             </div>  <br>
              <div class="form-group">
                 <label>Gender</label>
                 <select name="gender" class="form-control" id="gender">
                     <option>Select</option>
                     <option>Male</option>
                     <option>Female</option>
-                  </select>
+                  </select> <br>
+                  <div class="form-group">
+                    <label>Profile Image</label>
+                    <input name="file" type="file"  class="form-control" required>
+                 </div>
              </div>
-            <input name="user_id"  value="{{ $user->id }}" class="form-control" required>
+
+            {{-- <input name="user_id"  value="{{ $user->id }}" class="form-control" required> --}}
              					
             </div>
             <div class="modal-footer">

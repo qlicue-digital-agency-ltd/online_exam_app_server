@@ -222,11 +222,6 @@
                </style>
                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 @endsection
-
-
-
-
-
 @section("contents")
 
       
@@ -266,7 +261,7 @@
                                    <tr>
                                  <td>
                                     <span class="custom-checkbox">
-                                       <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                    <input type="checkbox" id="checkbox1" name="options[]" value="">
                                        <label for="checkbox1"></label>
                                     </span>
                                  </td>
